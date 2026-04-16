@@ -3,6 +3,8 @@ import { defaultCategories } from "@/data/categories";
 import { AddTransactionForm } from "../_components/transaction-form";
 import { getTransaction } from "@/actions/transaction";
 
+export const maxDuration = 60; // Increase timeout to 60s for Vercel AI processing
+
 export default async function AddTransactionPage({ searchParams }) {
   const accounts = await getUserAccounts();
   const editId = searchParams?.edit;
