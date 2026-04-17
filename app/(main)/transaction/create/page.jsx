@@ -7,7 +7,10 @@ export const maxDuration = 60; // Increase timeout to 60s for Vercel AI processi
 
 export default async function AddTransactionPage({ searchParams }) {
   const accounts = await getUserAccounts();
-  const editId = searchParams?.edit;
+  
+  // Await searchParams in Next.js 15
+  const resolvedSearchParams = await searchParams;
+  const editId = resolvedSearchParams?.edit;
 
   let initialData = null;
   if (editId) {
