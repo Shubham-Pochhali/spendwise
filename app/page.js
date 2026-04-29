@@ -1,4 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
@@ -12,17 +21,65 @@ import HeroSection from "@/components/hero";
 import Link from "next/link";
 
 const LandingPage = () => {
+  const container = useRef();
+
+  useGSAP(() => {
+    gsap.from(".stat-item", {
+      y: 30,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: ".stats-section",
+        start: "top 85%"
+      }
+    });
+
+    gsap.from(".feature-card", {
+      y: 50,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: ".features-section",
+        start: "top 80%"
+      }
+    });
+
+    gsap.from(".step-item", {
+      y: 30,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: ".how-it-works-section",
+        start: "top 80%"
+      }
+    });
+
+    gsap.from(".testimonial-card", {
+      scale: 0.9,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: ".testimonials-section",
+        start: "top 85%"
+      }
+    });
+  }, { scope: container });
+
   return (
-    <div className="min-h-screen bg-white">
+    <div ref={container} className="min-h-screen bg-white">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Stats Section */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 stats-section">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {statsData.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center stat-item">
                 <div className="text-4xl font-bold text-blue-600 mb-2">
                   {stat.value}
                 </div>
@@ -34,14 +91,14 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20">
+      <section id="features" className="py-20 features-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Everything you need to manage your finances
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuresData.map((feature, index) => (
-              <Card className="p-6" key={index}>
+              <Card className="p-6 feature-card" key={index}>
                 <CardContent className="space-y-4 pt-4">
                   {feature.icon}
                   <h3 className="text-xl font-semibold">{feature.title}</h3>
@@ -54,12 +111,12 @@ const LandingPage = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-blue-50">
+      <section className="py-20 bg-blue-50 how-it-works-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {howItWorksData.map((step, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center step-item">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   {step.icon}
                 </div>
@@ -72,14 +129,14 @@ const LandingPage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20">
+      <section id="testimonials" className="py-20 testimonials-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">
             What Our Users Say
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonialsData.map((testimonial, index) => (
-              <Card key={index} className="p-6">
+              <Card key={index} className="p-6 testimonial-card">
                 <CardContent className="pt-4">
                   <div className="flex items-center mb-4">
                     <Image

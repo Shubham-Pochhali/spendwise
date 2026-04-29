@@ -22,54 +22,65 @@ const Header = async () => {
           />
         </Link>
 
-        {/* Navigation Links - Different for signed in/out users */}
-        <div className="hidden md:flex items-center space-x-8">
-          <SignedOut>
-            <a href="#features" className="text-gray-600 hover:text-blue-600">
-              Features
-            </a>
-            <a
-              href="#testimonials"
-              className="text-gray-600 hover:text-blue-600"
-            >
-              Testimonials
-            </a>
-          </SignedOut>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex items-center space-x-4">
-          <SignedIn>
-            <Link
-              href="/dashboard"
-              className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
-            >
-              <Button variant="outline">
-                <LayoutDashboard size={18} />
-                <span className="hidden md:inline">Dashboard</span>
-              </Button>
+        <div className="flex items-center space-x-8">
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/about" className="text-gray-600 hover:text-blue-600 font-medium">
+              About
             </Link>
-            <a href="/transaction/create">
-              <Button className="flex items-center gap-2">
-                <PenBox size={18} />
-                <span className="hidden md:inline">Add Transaction</span>
-              </Button>
-            </a>
-          </SignedIn>
-          <SignedOut>
-            <SignInButton forceRedirectUrl="/dashboard">
-              <Button variant="outline">Login</Button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: "w-10 h-10",
-                },
-              }}
-            />
-          </SignedIn>
+            <Link href="/pricing" className="text-gray-600 hover:text-blue-600 font-medium">
+              Pricing
+            </Link>
+            <Link href="/contact" className="text-gray-600 hover:text-blue-600 font-medium">
+              Contact
+            </Link>
+            <SignedOut>
+              <a href="/#features" className="text-gray-600 hover:text-blue-600 font-medium">
+                Features
+              </a>
+              <a
+                href="/#testimonials"
+                className="text-gray-600 hover:text-blue-600 font-medium"
+              >
+                Testimonials
+              </a>
+            </SignedOut>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center space-x-4">
+            <SignedIn>
+              <Link
+                href="/dashboard"
+                className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
+              >
+                <Button variant="outline">
+                  <LayoutDashboard size={18} />
+                  <span className="hidden md:inline">Dashboard</span>
+                </Button>
+              </Link>
+              <a href="/transaction/create">
+                <Button className="flex items-center gap-2">
+                  <PenBox size={18} />
+                  <span className="hidden md:inline">Add Transaction</span>
+                </Button>
+              </a>
+            </SignedIn>
+            <SignedOut>
+              <SignInButton forceRedirectUrl="/dashboard">
+                <Button variant="outline">Login</Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "w-10 h-10",
+                  },
+                }}
+              />
+            </SignedIn>
+          </div>
         </div>
       </nav>
     </header>
